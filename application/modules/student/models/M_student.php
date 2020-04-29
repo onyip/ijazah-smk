@@ -31,7 +31,7 @@ class  M_student extends CI_Model{
 			$this->db->or_like('a.nis', $keyword);
 		}
 
-		$this->db->select('a.id, a.nis, a.name, a.ijasah, b.name c, c.year y');
+		$this->db->select('a.id, a.nis, a.name, a.ijasah, a.skl, b.name c, c.year y');
 		$this->db->from('student a');
 		$this->db->join('class b', 'b.id = a.class');
 		$this->db->join('s_year c', 'c.id = a.period');
@@ -52,7 +52,7 @@ class  M_student extends CI_Model{
 
 	public function delet($id)
 	{
-		$this->db->where($id)->delete('student');
+		$this->db->where(['id' =>$id])->delete('student');
 	}
 
 	public function id($id)
