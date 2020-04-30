@@ -118,7 +118,7 @@
  										<td class="text-center"><?=$baris->y?></td>
  										<td class="text-center">
  											<?php if ($baris->skl != null): ?>
- 												<a href="<?=base_url("assets/ijazah/$baris->skl")?>" target="_blank">
+ 												<a href="<?=base_url("assets/skl/$baris->skl")?>" target="_blank">
  													<button class="btn btn-info btn-xs">
  														<i class="fa fa-eye"></i>
  													</button>
