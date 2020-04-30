@@ -276,7 +276,7 @@ class Student extends MY_Controller {
               'id' => random_string('basic').time(),
               'nis' => $value['A'],
               'name' => $value['B'],
-              'tgl_lahir' => $value['C'],
+              'tgl_lahir' => (string)$value['C'],
               'class' => $this->input->post('class'),
               'period' => $this->input->post('period'),
               'created_by' => $this->session->userdata('name')
