@@ -379,14 +379,17 @@ class Student extends MY_Controller {
       $this->session->set_flashdata('cus', 'You do not have access to delete this data !');
       redirect('student');
     }
-    $data = ['class' => $this->session->userdata('by_class')];
+    $data = ['class' => $this->session->userdata('by_class'), 'period' =>$this->session->userdata('by_period')];
     $target = $this->m_student->id($data)->result();
     foreach ($target as $k) {
       if ($k->ijasah != NULL) {
         unlink("./assets/ijazah/$k->ijasah");
       }
+      if ($k->skl != NULL) {
+        unlink("./assets/skl/$k->skl");
+      }
     }
-    $this->m_student->delet($data);
+    $this->m_student->delet_by_class($data);
     $this->session->set_flashdata('success', 'Delete');
     redirect('student');
 

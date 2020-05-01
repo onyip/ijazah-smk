@@ -71,4 +71,9 @@ class  M_student extends CI_Model{
 		return $this->db->get_where('student', $were);
 	}
 
+	public function delet_by_class($data)
+	{
+		$this->db->where($data)->delete('student');
+	}
+
 }
