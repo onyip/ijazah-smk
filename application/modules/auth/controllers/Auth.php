@@ -56,23 +56,31 @@ class Auth extends MY_Controller {
 
 					} else{
 
-						$data = [
-							'id' => $cek['id'],
-							'name' => $cek['name'],
-							'username' => $cek['username'],
-							'created' => $cek['created'],
-							'is_active' => $cek['is_active'],
-							'status' => "logined",
-							'id_group' => $cek['id_group']
-						];
-
-						$this->session->set_userdata($data);
-						$this->session->set_flashdata('success', 'Login');
-						if ($this->session->userdata('id_group') == "3") {
-							$id =$this->session->userdata('id');
-							redirect("ijazah");
+						$cek_group = $this->m_group->id($cek['id_group']);
+						if (@$cek_group->is_active == 0) {
+							$this->session->set_flashdata('pesan', '<div class=" text-center alert alert-warning" role="alert" id="pesan">
+								You cannot Sign in at this time !</div>');
+							$this->load->view('login', $data);
 						}else{
-							redirect ('dashboard');
+
+							$data = [
+								'id' => $cek['id'],
+								'name' => $cek['name'],
+								'username' => $cek['username'],
+								'created' => $cek['created'],
+								'is_active' => $cek['is_active'],
+								'status' => "logined",
+								'id_group' => $cek['id_group']
+							];
+
+							$this->session->set_userdata($data);
+							$this->session->set_flashdata('success', 'Login');
+							if ($this->session->userdata('id_group') == "3") {
+								$id =$this->session->userdata('id');
+								redirect("ijazah");
+							}else{
+								redirect ('dashboard');
+							}
 						}
 					}
 				}
